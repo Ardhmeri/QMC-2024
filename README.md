@@ -25,14 +25,14 @@ Objectfiles:
 
 qmc.x: Executable file generated after compiling the code.
 
-To copile the code :
+To compile the code :
 Use the Fortran compiler (gfortran, ifort, etc.) to compile each Fortran source code file (*.f90) into its corresponding object file (*.o).
                 gfortran -c  QuantumMonteCarlo.f90 -o  QuantumMonteCarlo.o 
  Link all object files into the final executable
                   gfortran *.o -o qmc.x 
 Run the compiled program:
                   ./qmc.x
- Afer you compile , the program will ask you to choose a number for a corresponding Input file , and depending on
+ After you compile , the program will ask you to choose a number for a corresponding Input file , and depending on
  the number you choose , it will show you the result for that specific Quantum System .
  
                   
