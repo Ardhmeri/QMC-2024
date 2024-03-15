@@ -5,9 +5,9 @@ implicit none
 ! Declare variables
 
  integer :: molecule_choice 
- real*8 :: lattice_spacing 
- integer :: lattice_points, i , k 
- integer :: num_dimensions
+ real*8 :: a 
+ integer :: num_elec, i , k 
+ integer :: num_nuc
  integer :: atomic_number
  integer*8 :: num_iterations
  integer :: num_runs
@@ -50,9 +50,9 @@ end select
 
 ! Read parameters from file
 
- read(1,*) lattice_spacing
- read(1,*) lattice_points
- read(1,*) num_dimensions
+ read(1,*) a
+ read(1,*) num_elec
+ read(1,*) num_nuc
  read(1,*) atomic_number
  read(1,*) num_iterations
  read(1,*) num_runs
@@ -60,9 +60,9 @@ end select
  read(1,*) propagation_length
  read(1,*) energy_reference
  
- allocate(nucleus_positions(3*num_dimensions))
+ allocate(nucleus_positions(3*num_nuc))
 
- do i=1,3*num_dimensions
+ do i=1,3*num_nuc
         read(1,*) nucleus_positions(i)
  enddo
     
@@ -79,7 +79,7 @@ allocate(acceptance_ratios(num_runs))
     
 !call ave_error(energies,num_runs,average_energy, energy_error)
 do k=1, num_runs
-     call QuantumMonteCarloStep(lattice_spacing,lattice_points,num_dimensions,atomic_number,nucleus_positions,time_step,num_iterations,energies(k),acceptance_ratios(k),propagation_length,energy_reference)
+     call QuantumMonteCarloStep(a,num_elec,num_nuc,atomic_number,nucleus_positions,time_step,num_iterations,energies(k),acceptance_ratios(k),propagation_length,energy_reference)
 enddo 
 
 ! Output results
